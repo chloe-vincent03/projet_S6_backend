@@ -16,7 +16,7 @@ const PlaceSchema = new mongoose.Schema({
     },
     inkLayer: {
         type: String,
-        required: true
+        required: false
     },
     watercolorLayer: {
         type: String,
