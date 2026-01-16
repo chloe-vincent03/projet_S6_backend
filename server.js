@@ -11,6 +11,9 @@ const app = express();
 app.use(cors()); // Autorise le partage de ressources
 app.use(express.json()); // Permet de lire le JSON envoyé par le front
 
+app.use('/api/places', require('./routes/places'));
+app.use('/api/user', require('./routes/user'));
+
 // Connexion à la base de données (MongoDB)
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('🌿 Connecté à la mémoire de la ville (MongoDB)'))
