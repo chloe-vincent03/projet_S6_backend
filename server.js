@@ -11,6 +11,12 @@ const app = express();
 app.use(cors()); // Autorise le partage de ressources
 app.use(express.json()); // Permet de lire le JSON envoyé par le front
 
+// LOG GLOBAL
+app.use((req, res, next) => {
+  console.log(`[GLOBAL LOG] ${req.method} ${req.url}`);
+  next();
+});
+
 app.use('/api/places', require('./routes/places'));
 app.use('/api/user', require('./routes/user'));
 
