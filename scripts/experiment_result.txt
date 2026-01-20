@@ -1,0 +1,9 @@
+🌿 Connected to MongoDB
+🔍 Finding Place 1...
+✅ Found Place: La Boulangerie du Vieux Pavé "696e13519c1eba2b40f538cb"
+👤 Creating User: test_user_1768900900247@test.com
+📋 Progress before save: [{"placeId":"696e13519c1eba2b40f538cb","isCompleted":true,"_id":"696f4924e0dba24f6f91e02f"}]
+💾 User saved.
+🔍 Fetched Back User Progress: [{"placeId":"696e13519c1eba2b40f538cb","isCompleted":true,"_id":"696f4924e0dba24f6f91e02f"}]
+🎉 SUCCESS: Progress saved!
+🧹 Cleanup done

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const Place = require('../models/Place');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const auth = require('../middleware/auth');
@@ -9,6 +10,16 @@ const auth = require('../middleware/auth');
 router.post('/register', async (req, res) => {
   try {
     const newUser = new User(req.body);
+
+    // Auto-discover the first place (Order 1 - Boulangerie)
+    const firstPlace = await Place.findOne({ order: 1 });
+    if (firstPlace) {
+      newUser.progress.push({
+        placeId: firstPlace._id,
+        isCompleted: true
+      });
+    }
+
     await newUser.save();
     res.status(201).json({ message: "Utilisateur créé avec succès !" });
   } catch (err) {

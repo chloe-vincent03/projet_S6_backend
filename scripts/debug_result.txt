@@ -1,0 +1,12 @@
+🌿 Connected to MongoDB
+FOUND_ORDER_1: La Boulangerie du Vieux Pavé (ID: 696e13519c1eba2b40f538cb)
+ALL_PLACES:
+[1] La Boulangerie du Vieux Pavé (Type of order: number)
+[2] Le Passage des Glycines (Type of order: number)
+[3] La Librairie du Temps Suspendu (Type of order: number)
+[4] Le Consulat (Type of order: number)
+[5] L'Atelier Floral (Type of order: number)
+[6] Le Café de l'Angle (Type of order: number)
+[7] La Givrée : Glacier de Saison (Type of order: number)
+[8] Le Théâtre des Songes (Type of order: number)
+[9] Le Kiosque de la Place (Type of order: number)
