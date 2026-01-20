@@ -9,6 +9,11 @@ const userSchema = new mongoose.Schema({
     placeId: { type: mongoose.Schema.Types.ObjectId, ref: 'Place' },
     isCompleted: { type: Boolean, default: false }
   }],
+  // Fragments de totem débloqués via le Grimoire
+  unlockedFragments: [{
+    fragmentId: { type: String, required: true },
+    dateUnlocked: { type: Date, default: Date.now }
+  }],
   createdAt: { type: Date, default: Date.now }
 });
 

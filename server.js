@@ -19,6 +19,7 @@ app.use((req, res, next) => {
 
 app.use('/api/places', require('./routes/places'));
 app.use('/api/user', require('./routes/user'));
+app.use('/api/enigmas', require('./routes/enigmas'));
 
 // Connexion à la base de données (MongoDB)
 mongoose.connect(process.env.MONGO_URI)
