@@ -18,7 +18,8 @@ const EnigmaSchema = new mongoose.Schema({
         zIndex: { type: Number, default: 1 },
         description: { type: String }
     },
-    difficulty: { type: String, enum: ['facile', 'moyen', 'difficile'], default: 'facile' }
+    difficulty: { type: String, enum: ['facile', 'moyen', 'difficile'], default: 'facile' },
+    totem_id: { type: Number, default: 1 }
 });
 
 module.exports = mongoose.model('Enigma', EnigmaSchema);
