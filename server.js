@@ -14,7 +14,7 @@ app.use(express.json()); // Permet de lire le JSON envoyé par le front
 
 
 // c'est ou il y a mon frontend
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // LOG GLOBAL
 app.use((req, res, next) => {
@@ -32,8 +32,8 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.error('Erreur de connexion :', err));
 
 
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+app.get('(.*)', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 const PORT = process.env.PORT || 3001;
