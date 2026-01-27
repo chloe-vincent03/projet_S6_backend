@@ -30,10 +30,6 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('🌿 Connecté à la mémoire de la ville (MongoDB)'))
   .catch(err => console.error('Erreur de connexion :', err));
 
-// Route de test
-app.get('/', (req, res) => {
-  res.send('Le serveur de la Ville Lente est en route...');
-});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
