@@ -32,11 +32,11 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.error('Erreur de connexion :', err));
 
 
-// Route "catch-all" pour le SPA (Single Page Application)
-// Redirige toutes les requêtes non-API vers index.html pour que le routeur du front prenne le relais
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// Route "catch-all" pour le SPA
+// Note : Commenté temporairement car le build front (dossier dist) n'est pas encore généré/copié
+// app.get('(.*)', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+// });
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
