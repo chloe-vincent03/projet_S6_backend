@@ -32,11 +32,8 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.error('Erreur de connexion :', err));
 
 
-app.get('/:any*', (req, res) => {
-  // Nuxt 4 génère le HTML dans .output/public/index.html 
-  // si tu l'as configuré en mode SPA
-  const indexPath = path.join(__dirname, 'public', 'index.html');
-  res.sendFile(indexPath);
+app.get(/^(?!\/api).+/, (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 const PORT = process.env.PORT || 3001;
