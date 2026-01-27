@@ -14,7 +14,7 @@ app.use(express.json()); // Permet de lire le JSON envoyé par le front
 
 
 // c'est ou il y a mon frontend
-app.use(express.static('dist'));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // LOG GLOBAL
 app.use((req, res, next) => {
@@ -32,11 +32,9 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.error('Erreur de connexion :', err));
 
 
-// Route "catch-all" pour le SPA
-// Note : Commenté temporairement car le build front (dossier dist) n'est pas encore généré/copié
-// app.get('(.*)', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-// });
+app.get('(.*)', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
