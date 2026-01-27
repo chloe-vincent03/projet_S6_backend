@@ -32,7 +32,7 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.error('Erreur de connexion :', err));
 
 
-app.get('(.*)', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
