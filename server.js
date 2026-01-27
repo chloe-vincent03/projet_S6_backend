@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const path = require('path');
 
 dotenv.config();
 
@@ -30,6 +31,12 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('🌿 Connecté à la mémoire de la ville (MongoDB)'))
   .catch(err => console.error('Erreur de connexion :', err));
 
+
+// Route "catch-all" pour le SPA (Single Page Application)
+// Redirige toutes les requêtes non-API vers index.html pour que le routeur du front prenne le relais
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
