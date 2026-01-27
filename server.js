@@ -14,7 +14,7 @@ app.use(express.json()); // Permet de lire le JSON envoyé par le front
 
 
 // c'est ou il y a mon frontend
-app.use(express.static('public'));
+app.use(express.static('dist'));
 
 // LOG GLOBAL
 app.use((req, res, next) => {
