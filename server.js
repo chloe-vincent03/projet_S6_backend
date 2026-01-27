@@ -11,6 +11,10 @@ const app = express();
 app.use(cors()); // Autorise le partage de ressources
 app.use(express.json()); // Permet de lire le JSON envoyé par le front
 
+
+// c'est ou il y a mon frontend
+app.use(express.static('public'));
+
 // LOG GLOBAL
 app.use((req, res, next) => {
   console.log(`[GLOBAL LOG] ${req.method} ${req.url}`);
