@@ -45,9 +45,17 @@ router.post('/login', async (req, res) => {
       { expiresIn: '24h' } // Le jeton expire après 24h
     );
 
+    // Cookie pour le stockage sécurisé
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: true, // true requis pour HTTPS (Vercel/Render)
+      sameSite: 'none', // requis pour cross-domain
+      maxAge: 24 * 60 * 60 * 1000 // 24h
+    });
+
     res.json({
       message: "Connexion réussie !",
-      token: token, // On envoie le jeton au front
+      token: token, // On envoie aussi le jeton au front au cas où
       userId: user._id
     });
   } catch (err) {
