@@ -5,6 +5,26 @@ const Place = require('../models/Place');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const auth = require('../middleware/auth');
+const upload = require('../middleware/upload');
+
+// MISE A JOUR PROFIL (Avatar + Username)
+router.put('/profile', auth, upload.single('avatar'), async (req, res) => {
+  try {
+    const user = await User.findById(req.auth.userId);
+    if (!user) return res.status(404).json({ message: "Utilisateur non trouvé" });
+
+    if (req.body.username) user.username = req.body.username;
+    if (req.body.email) user.email = req.body.email;
+    if (req.file) {
+      user.avatar = req.file.path; // URL Cloudinary
+    }
+
+    await user.save();
+    res.json({ message: "Profil mis à jour", user });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 // INSCRIPTION
 router.post('/register', async (req, res) => {

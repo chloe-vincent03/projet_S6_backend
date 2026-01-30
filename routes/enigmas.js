@@ -21,7 +21,7 @@ const getAuthUser = async (req) => {
 // Récupère la liste des énigmes
 router.get('/', async (req, res) => {
     try {
-        const enigmas = await Enigma.find();
+        const enigmas = await Enigma.find().select('+answer');
         // Check if user is logged in to mark solved status? 
         // For now, just return enigmas, frontend matches with user progress.
         res.json(enigmas);

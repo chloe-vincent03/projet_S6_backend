@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  avatar: { type: String, default: '' }, // URL de l'image Cloudinary
   progress: [{ // Pour stocker les IDs des lieux déjà visités/coloriés
     placeId: { type: mongoose.Schema.Types.ObjectId, ref: 'Place' },
     isCompleted: { type: Boolean, default: false }
