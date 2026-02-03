@@ -18,13 +18,42 @@ const getAuthUser = async (req) => {
 };
 
 // GET /api/enigmas
-// Récupère la liste des énigmes
+// Récupère la liste des énigmes (avec réponse SI résolue par l'utilisateur connecté)
 router.get('/', async (req, res) => {
     try {
+        // 1. Fetch all enigmas (answers hidden by default)
+        // We select answer specifically so we can conditionally reveal it
         const enigmas = await Enigma.find().select('+answer');
-        // Check if user is logged in to mark solved status? 
-        // For now, just return enigmas, frontend matches with user progress.
-        res.json(enigmas);
+
+        // 2. Identify User
+        const userDecoded = await getAuthUser(req);
+        let unlockedFragmentIds = [];
+
+        if (userDecoded && userDecoded.userId) {
+            const user = await User.findById(userDecoded.userId);
+            if (user && user.unlockedFragments) {
+                unlockedFragmentIds = user.unlockedFragments.map(f => f.fragmentId);
+            }
+        }
+
+        // 3. Process enigmas to hide/show answer
+        const processedEnigmas = enigmas.map(enigma => {
+            const enigmaObj = enigma.toObject();
+
+            // Check if this enigma's reward fragment is in user's unlocked list
+            const isSolved = unlockedFragmentIds.includes(enigma.reward.fragment_id);
+
+            if (isSolved) {
+                // Return as is (with answer)
+                return enigmaObj;
+            } else {
+                // Remove answer property for unsolved enigmas
+                delete enigmaObj.answer;
+                return enigmaObj;
+            }
+        });
+
+        res.json(processedEnigmas);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
